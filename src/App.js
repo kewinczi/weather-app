@@ -2,16 +2,23 @@ import React, { Component} from "react";
 import "./App.css";
 import {hot} from "react-hot-loader";
 import Card from  './components/Card'
+import Settings from './components/Settings';
 
 class App extends Component {
     constructor() {
         super();
         this.state = { 
             weather: [],
-            isLoading: true 
+            isLoading: true,
+            numberOfCities: 1
         }
+        this.setNumberOfCities = this.setNumberOfCities.bind(this);
     }
     
+    setNumberOfCities(number) {
+        this.setState({numberOfCities: number})        
+    }
+
     fetchWeatherForCity(city) {
         fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=84aea1ab45e8d501835d9128346165db`)
             .then(response => response.json())
@@ -29,22 +36,20 @@ class App extends Component {
             console.log(response)
         })
     }
+    
     componentDidMount() {
         this.fetchWeatherForCity("Aveiro");
-        this.fetchWeatherForCity("Wroclaw");
-        this.fetchWeatherForCity("Porto");
-        this.fetchWeatherForCity("Rybnik");
-        this.fetchForecastForCity("Rybnik");
-
     }
 
     render() {
+        const { weather, isLoading } = this.state;
         return (
             <div className="container text-light">
+                <Settings setNumberOfCities={this.setNumberOfCities} x="a"/>
                 <div className="row d-flex justify-content-center">
                     {
-                        this.state.isLoading ? <h1>Loading</h1> : 
-                        this.state.weather.map((city, index) => {
+                        isLoading ? <h1>Loading</h1> : 
+                        weather.map((city, index) => {
                             return <Card key={index} weather={city} />
                         })
                     }
