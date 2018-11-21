@@ -8,7 +8,7 @@ class Card extends Component{
         const { weather } = this.props;
         return (
             <div className="col-lg-4 col-md-6 d-flex justify-content-center my-3">
-                <div className="card text-center h-100 d-inline-block rounded-0 border-0" style={{width: '350px', backgroundColor: 'rgba(20,20,255,0.2)'}}>
+                <div className="card text-center h-100 d-inline-block rounded-0 border-0" style={{width: '350px', backgroundColor: 'rgba(0,0,0,0.4)'}}>
                     <div className="card-body">
                         <h1 className="card-title">{weather.name}</h1>
                         <div className="row ">

@@ -30,7 +30,7 @@ class App extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container text-light">
                 <div className="row d-flex justify-content-center">
                     {
                         this.state.isLoading ? <h1>Loading</h1> : 
