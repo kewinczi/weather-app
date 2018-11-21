@@ -3,6 +3,7 @@ import "./App.css";
 import {hot} from "react-hot-loader";
 import Card from  './components/Card'
 import Settings from './components/Settings';
+import { listOfCities } from './constants';
 
 class App extends Component {
     constructor() {
@@ -13,10 +14,11 @@ class App extends Component {
             numberOfCities: 1
         }
         this.setNumberOfCities = this.setNumberOfCities.bind(this);
+        this.fetchWeatherForAllCities = this.fetchWeatherForAllCities.bind(this);
     }
     
     setNumberOfCities(number) {
-        this.setState({numberOfCities: number})        
+        this.setState({numberOfCities: number})
     }
 
     fetchWeatherForCity(city) {
@@ -29,16 +31,14 @@ class App extends Component {
             })
     }
 
-    fetchForecastForCity(city) {
-        fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=84aea1ab45e8d501835d9128346165db`)
-        .then(response => response.json())
-        .then(response => {
-            console.log(response)
+    fetchWeatherForAllCities() {
+        listOfCities.forEach((item) => {
+            this.fetchWeatherForCity(item);
         })
     }
     
     componentDidMount() {
-        this.fetchWeatherForCity("Aveiro");
+        this.fetchWeatherForAllCities();
     }
 
     render() {
