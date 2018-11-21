@@ -4,6 +4,7 @@ import {hot} from "react-hot-loader";
 import Card from  './components/Card'
 import Settings from './components/Settings';
 import { listOfCities } from './constants';
+import Navbar from './components/Navbar';
 
 class App extends Component {
     constructor() {
@@ -44,17 +45,22 @@ class App extends Component {
     render() {
         const { weather, isLoading, numberOfCities } = this.state;
         return (
-            <div className="container text-light">
+            <div>
+                <Navbar />
                 <Settings setNumberOfCities={this.setNumberOfCities} x="a"/>
-                <div className="row d-flex justify-content-center">
-                    {
-                        isLoading ? <h1>Loading</h1> : 
-                        weather.slice(0,numberOfCities).map((city, index) => {
-                            return <Card key={index} weather={city} />
-                        })
-                    }
+                <div className="container text-light">
+
+                    <div className="row d-flex justify-content-center">
+                        {
+                            isLoading ? <h1>Loading</h1> : 
+                            weather.slice(0,numberOfCities).map((city, index) => {
+                                return <Card key={index} weather={city} />
+                            })
+                        }
+                    </div>
                 </div>
             </div>
+
         );
     }
 
