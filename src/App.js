@@ -42,14 +42,14 @@ class App extends Component {
     }
 
     render() {
-        const { weather, isLoading } = this.state;
+        const { weather, isLoading, numberOfCities } = this.state;
         return (
             <div className="container text-light">
                 <Settings setNumberOfCities={this.setNumberOfCities} x="a"/>
                 <div className="row d-flex justify-content-center">
                     {
                         isLoading ? <h1>Loading</h1> : 
-                        weather.map((city, index) => {
+                        weather.slice(0,numberOfCities).map((city, index) => {
                             return <Card key={index} weather={city} />
                         })
                     }
