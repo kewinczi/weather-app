@@ -11,6 +11,7 @@ class App extends Component {
         this.state = { 
             weather: [],
             isLoading: true,
+            isError: false,
             numberOfCities: 1
         }
         this.setNumberOfCities = this.setNumberOfCities.bind(this);
@@ -27,7 +28,13 @@ class App extends Component {
             .then(response => {
                 console.log(response)
                 const weather = [...this.state.weather, response]
-                this.setState({ weather, isLoading: false })
+                this.setState({ 
+                    weather, 
+                    isLoading: false,
+                    isError: false
+                })
+            }).catch(()=>{
+                this.setState({isError: true});
             })
     }
 
@@ -42,7 +49,7 @@ class App extends Component {
     }
 
     render() {
-        const { weather, isLoading, numberOfCities } = this.state;
+        const { weather, isLoading, isError, numberOfCities } = this.state;
         return (
             <div>
                 <Navbar setNumberOfCities={this.setNumberOfCities}/>
@@ -50,10 +57,13 @@ class App extends Component {
 
                     <div className="row d-flex justify-content-center">
                         {
-                            isLoading ? <h1>Loading</h1> : 
+                            isLoading && !isError ? <h1>Loading...</h1> : 
                             weather.slice(0,numberOfCities).map((city, index) => {
                                 return <Card key={index} weather={city} />
                             })
+                        }
+                        {
+                            isError ? <h1>Error!</h1> : <div></div>
                         }
                     </div>
                 </div>

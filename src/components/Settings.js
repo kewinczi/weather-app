@@ -20,7 +20,8 @@ class Settings extends Component{
                                 className="form-check-input" 
                                 type="radio" 
                                 name="radio"
-                                value={`option${index}`} 
+                                value={`option${index}`}
+                                defaultChecked={index === 0 ? true : false}
                                 onChange={() => this.handleChange(item)} 
                             />
                             <label className="form-check-label" htmlFor="exampleRadios1">
