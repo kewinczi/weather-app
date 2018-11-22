@@ -2,7 +2,6 @@ import React, { Component} from "react";
 import "./App.css";
 import {hot} from "react-hot-loader";
 import Card from  './components/Card'
-import Settings from './components/Settings';
 import { listOfCities } from './constants';
 import Navbar from './components/Navbar';
 
@@ -46,8 +45,7 @@ class App extends Component {
         const { weather, isLoading, numberOfCities } = this.state;
         return (
             <div>
-                <Navbar />
-                <Settings setNumberOfCities={this.setNumberOfCities} x="a"/>
+                <Navbar setNumberOfCities={this.setNumberOfCities}/>
                 <div className="container text-light">
 
                     <div className="row d-flex justify-content-center">

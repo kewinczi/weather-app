@@ -12,7 +12,7 @@ class Settings extends Component{
     render() {
         const itemsNumber = [1,4,9];
         return (
-            <div>
+            <div className="container">
                 {itemsNumber.map((item, index) => {
                     return (
                         <div key={`radio${index}`} className="form-check">

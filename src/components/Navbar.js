@@ -1,4 +1,5 @@
 import React, { Component} from "react";
+import Settings from "./Settings";
 
 class Navbar extends Component{
     constructor(props) {
@@ -8,9 +9,14 @@ class Navbar extends Component{
     render() {
         return (
             <div>
-            <nav class="navbar sticky-top p-0 d-flex justify-content-end">
-                <a class="nav-link text-light" href="#">Settings</a>
-            </nav>
+                <nav className="navbar sticky-top py-0 d-flex justify-content-end">
+                    <div className="dropdown">
+                        <a className="nav-link text-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Settings</a>
+                        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <Settings setNumberOfCities={this.props.setNumberOfCities}/>
+                        </div>
+                    </div>
+                </nav>
             </div>
         );
     }
