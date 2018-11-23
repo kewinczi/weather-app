@@ -13,7 +13,7 @@ class Card extends Component{
                         <h1 className="card-title display-4">{weather.name}</h1>
                         <div className="row">
                             <div className="col align-self-end">
-                                <img src={`http://openweathermap.org/img/w/${weather.weather[0].icon}.png`}></img>
+                                <img src={`https://openweathermap.org/img/w/${weather.weather[0].icon}.png`}></img>
                             </div>
                             <div className="col d-flex justify-content-end">
                                 <h2 className="display-4">{weather.main.temp}&deg;C</h2>
