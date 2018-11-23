@@ -26,7 +26,6 @@ class App extends Component {
         fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=84aea1ab45e8d501835d9128346165db`)
             .then(response => response.json())
             .then(response => {
-                console.log(response)
                 const weather = [...this.state.weather, response]
                 this.setState({ 
                     weather, 
