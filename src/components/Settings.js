@@ -13,6 +13,7 @@ class Settings extends Component{
         const itemsNumber = [1,4,9];
         return (
             <div className="container">
+                Show:   
                 {itemsNumber.map((item, index) => {
                     return (
                         <div key={`radio${index}`} className="form-check">
