@@ -23,7 +23,7 @@ class App extends Component {
     }
 
     fetchWeatherForCity(city) {
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=84aea1ab45e8d501835d9128346165db`)
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=d99157026a1814b598c98bc8bc02fa34`)
             .then(response => response.json())
             .then(response => {
                 const weather = [...this.state.weather, response]
