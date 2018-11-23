@@ -1,0 +1,29 @@
+.App {
+    margin: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+
+  }
+
+body {
+    background-image: url('./images/P1070811.png');
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.card:hover {
+    background-color: rgba(0,0,0,0.5);
+}
+
+.card {
+    width: 350px;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.navbar {
+    background-color: rgba(0,0,0,0.7);
+}
+
+.dropdown-menu {
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+}
