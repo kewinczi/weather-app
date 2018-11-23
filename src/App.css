@@ -5,7 +5,7 @@
   }
 
 body {
-    background-image: url('./images/P1070811.png');
+    background-image: url('https://raw.githubusercontent.com/kewinczi/weather-app/master/src/images/P1070811.png');
     background-size: cover;
     background-attachment: fixed;
 }
