@@ -1,16 +1,29 @@
 import React, { Component} from "react";
+import EditCard from "./EditCard"
 
 class Card extends Component{
     constructor(props) {
         super(props);
+        this.state = { isEdited: false }
+        this.handleEdit = this.handleEdit.bind(this);
+    }
+
+    handleEdit() {
+        this.setState({ isEdited: !this.state.isEdited});
     }
     render() {
         const { weather } = this.props;
+        const { isEdited } = this.state;
+        const editIcon = !isEdited ? "Edit" : "X";
+        const saveIcon = isEdited ? "Save": ""
+        const cityName = isEdited ? <EditCard cityName={weather.name}/> : <h1 className="card-title display-4">{weather.name}</h1>
         return (
             <div className="col-lg-4 col-md-6 d-flex justify-content-center my-3">
                 <div className="card text-center h-100 d-inline-block rounded-0 border-0">
+                    <a className="d-flex justify-content-end pr-1 d-inline-block float-right" onClick={this.handleEdit}>{editIcon}</a>
+                    <a className="d-inline-block float-right pr-1">{saveIcon}</a>
                     <div className="card-body">
-                        <h1 className="card-title display-4">{weather.name}</h1>
+                        {cityName}
                         <div className="row">
                             <div className="col align-self-end">
                                 <img src={`https://openweathermap.org/img/w/${weather.weather[0].icon}.png`}></img>
