@@ -1,4 +1,5 @@
 import React, { Component} from "react";
+import { Link } from "react-router-dom";
 
 class Settings extends Component{
     constructor(props) {
@@ -11,6 +12,7 @@ class Settings extends Component{
 
     render() {
         const itemsNumber = [1,4,9];
+        const { numberOfCities } = this.props;
         return (
             <div className="container">
                 Show:   
@@ -22,7 +24,7 @@ class Settings extends Component{
                                 type="radio" 
                                 name="radio"
                                 value={`option${index}`}
-                                defaultChecked={index === 0 ? true : false}
+                                defaultChecked={item === numberOfCities ? true : false}
                                 onChange={() => this.handleChange(item)} 
                             />
                             <label className="form-check-label" htmlFor="exampleRadios1">
@@ -31,6 +33,7 @@ class Settings extends Component{
                         </div>
                     )
                 })}
+                <Link to="/" className="btn btn-sm btn-light">Save</Link>
             </div>
         );
     }

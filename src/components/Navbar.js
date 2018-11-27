@@ -1,5 +1,5 @@
 import React, { Component} from "react";
-import Settings from "./Settings";
+import { Link } from "react-router-dom";
 
 class Navbar extends Component{
     constructor(props) {
@@ -10,12 +10,7 @@ class Navbar extends Component{
         return (
             <div>
                 <nav className="navbar sticky-top py-0 d-flex justify-content-end">
-                    <div className="dropdown">
-                        <a className="nav-link text-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Settings</a>
-                        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <Settings setNumberOfCities={this.props.setNumberOfCities}/>
-                        </div>
-                    </div>
+                    <Link to="/settings" className="nav-link text-light">Settings</Link>
                 </nav>
             </div>
         );
