@@ -1,6 +1,8 @@
 import React, { Component} from "react";
 import EditCard from "./EditCard";
 import { handleErrors } from "../helpers";
+import { FiCheck, FiEdit } from "react-icons/fi";
+import { IoMdClose } from "react-icons/io";
 
 class Card extends Component{
     constructor(props) {
@@ -20,6 +22,7 @@ class Card extends Component{
     }
 
     handleChange(e) {
+        this.setState({ isNotFound: false })
         const newCityName = e.target.value;
         this.setState({newCityName})
     }
@@ -56,7 +59,7 @@ class Card extends Component{
             }, 500)
             }).catch(()=>{
                 this.setState({ showSpinner: false });
-                this.setState({isNotFound: true});
+                this.setState({ isNotFound: true });
             })
     }
 
@@ -67,16 +70,18 @@ class Card extends Component{
     render() {
         const { weather } = this.props;
         const { isEdited } = this.state;
-        const editIcon = !isEdited ? "Edit" : "X";
-        const saveIcon = isEdited ? "Save": ""
+        const editIcon = !isEdited ? <FiEdit className="icon-color" /> : <IoMdClose className="icon-color"/>;
+        const saveIcon = isEdited ? <FiCheck className="icon-color"/>: ""
         const cityName = isEdited ? <EditCard cityName={weather.name} handleChange={this.handleChange}/> : <h1 className="card-title display-4">{weather.name}</h1>
         return (
             <div className="col-lg-4 col-md-6 d-flex justify-content-center my-3">
                 <div className="card text-center h-100 d-inline-block rounded-0 border-0">
-                    <a className="d-flex justify-content-end pr-1 d-inline-block float-right" onClick={this.handleEdit}>{editIcon}</a>
-                    <a className="d-inline-block float-right pr-2" onClick={this.handleSave}>{saveIcon}</a>
-                    <a className="d-inline-block float-right pr-2">{this.state.showSpinner ? "Spinner" : ""}</a>
-                    <a className="d-inline-block float-right pr-2">{this.state.isNotFound ? "Can't find": ""}</a>
+                    <div className="d-flex justify-content-end">
+                        <a className="icon pr-2">{this.state.isNotFound ? "Can't find": ""}</a>
+                        <a className="icon pr-2">{this.state.showSpinner ? "Spinner" : ""}</a>
+                        <a className="icon pr-2" onClick={this.handleSave}>{saveIcon}</a>
+                        <a className="icon pr-1" disabled onClick={this.handleEdit}>{editIcon}</a>
+                    </div>
                     <div className="card-body">
                         {cityName}
                         <div className="row">

@@ -32,3 +32,12 @@ body {
 .editCityInput:focus {
     outline: none;
 }
+
+.icon {
+    float: right;
+    display: inline-block;
+}
+
+.icon-color:hover {
+    color: gray
+}
