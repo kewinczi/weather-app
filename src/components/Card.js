@@ -4,24 +4,41 @@ import EditCard from "./EditCard"
 class Card extends Component{
     constructor(props) {
         super(props);
-        this.state = { isEdited: false }
+        this.state = { 
+            isEdited: false, 
+            newCityName: "" 
+        }
+        this.handleChange = this.handleChange.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
+        this.handleSave = this.handleSave.bind(this);
+    }
+
+    handleChange(e) {
+        const newCityName = e.target.value;
+        this.setState({newCityName})
     }
 
     handleEdit() {
         this.setState({ isEdited: !this.state.isEdited});
     }
+
+    handleSave() {
+        this.handleEdit();
+        console.log(this.state.newCityName)
+        this.props.changeCity(this.state.newCityName, this.props.index)
+    }
+
     render() {
         const { weather } = this.props;
         const { isEdited } = this.state;
         const editIcon = !isEdited ? "Edit" : "X";
         const saveIcon = isEdited ? "Save": ""
-        const cityName = isEdited ? <EditCard cityName={weather.name}/> : <h1 className="card-title display-4">{weather.name}</h1>
+        const cityName = isEdited ? <EditCard cityName={weather.name} handleChange={this.handleChange}/> : <h1 className="card-title display-4">{weather.name}</h1>
         return (
             <div className="col-lg-4 col-md-6 d-flex justify-content-center my-3">
                 <div className="card text-center h-100 d-inline-block rounded-0 border-0">
                     <a className="d-flex justify-content-end pr-1 d-inline-block float-right" onClick={this.handleEdit}>{editIcon}</a>
-                    <a className="d-inline-block float-right pr-1">{saveIcon}</a>
+                    <a className="d-inline-block float-right pr-1" onClick={this.handleSave}>{saveIcon}</a>
                     <div className="card-body">
                         {cityName}
                         <div className="row">

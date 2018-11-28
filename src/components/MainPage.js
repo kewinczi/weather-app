@@ -3,7 +3,7 @@ import Card from  './Card'
 class MainPage extends Component {
 
     render() {
-        const { weather, isLoading, isError, numberOfCities } = this.props;
+        const { weather, isLoading, isError, numberOfCities, changeCity } = this.props;
         return (
             <div>
                 <div className="container">
@@ -11,7 +11,7 @@ class MainPage extends Component {
                         {
                             isLoading && !isError ? <h1>Loading...</h1> : 
                             weather.slice(0,numberOfCities).map((city, index) => {
-                                return <Card key={index} weather={city} />
+                                return <Card key={index} index={index} weather={city} changeCity={changeCity} />
                             })
                         }
                         {

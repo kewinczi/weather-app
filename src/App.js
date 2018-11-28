@@ -64,9 +64,7 @@ class App extends Component {
         this.fetchWeatherForAllCities();
     }
 
-    changeCity() {
-        const index = 0
-        const city = "Oslo";
+    changeCity(city, index) {
         this.fetchWeatherForCity(city, this.replaceCity, index);
     };
 
@@ -85,6 +83,7 @@ class App extends Component {
                                     weather={weather}
                                     isLoading={isLoading}
                                     isError={isError}
+                                    changeCity={this.changeCity}
                                 />
                             )}
                         />
@@ -98,7 +97,6 @@ class App extends Component {
                         />
                     </div>
                 </Router>
-                <button onClick={this.changeCity}>Cities</button>
             </div>
 
         );
