@@ -1,18 +1,22 @@
 import React, { Component} from "react";
-import EditCard from "./EditCard"
+import EditCard from "./EditCard";
+import { handleErrors } from "../helpers";
 
 class Card extends Component{
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             isEdited: false,
-            isValid: false, 
-            newCityName: "" 
+            newCityName: "",
+            showSpinner: false,
+            isNotFound: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
+        this.toggleEditMode = this.toggleEditMode.bind(this);
         this.handleSave = this.handleSave.bind(this);
-        this.validateNewCityName = this.validateNewCityName.bind(this);
+        this.isNewCityNameValid = this.isNewCityNameValid.bind(this);
+        this.fetchWeatherForNewCity = this.fetchWeatherForNewCity.bind(this);
     }
 
     handleChange(e) {
@@ -20,20 +24,44 @@ class Card extends Component{
         this.setState({newCityName})
     }
 
-    handleEdit() {
+    toggleEditMode() {
         this.setState({ isEdited: !this.state.isEdited});
     }
 
+    handleEdit() {
+        this.toggleEditMode();
+        this.setState({ isNotFound: false })
+    }
+
     handleSave() {
-        if (this.validateNewCityName()) {
-            this.handleEdit();
-            this.props.changeCity(this.state.newCityName, this.props.index);
-            this.setState({ newCityName: "", isValid: false });
+        if (this.isNewCityNameValid()) {
+            this.fetchWeatherForNewCity(this.state.newCityName);
         }
     }
 
-    validateNewCityName() {
-        return this.state.newCityName !== "";;
+    fetchWeatherForNewCity(city) {
+        this.setState({ 
+            showSpinner: true,
+            isNotFound: false
+        });
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=d99157026a1814b598c98bc8bc02fa34`)
+            .then(handleErrors)
+            .then(response => response.json())
+            .then(response => {
+                setTimeout(() => {
+                this.props.changeCity(response, this.props.index);
+                this.setState({ showSpinner: false })
+                this.setState({ newCityName: "" });
+                this.toggleEditMode();
+            }, 500)
+            }).catch(()=>{
+                this.setState({ showSpinner: false });
+                this.setState({isNotFound: true});
+            })
+    }
+
+    isNewCityNameValid() {
+        return this.state.newCityName !== "";
     }
 
     render() {
@@ -46,7 +74,9 @@ class Card extends Component{
             <div className="col-lg-4 col-md-6 d-flex justify-content-center my-3">
                 <div className="card text-center h-100 d-inline-block rounded-0 border-0">
                     <a className="d-flex justify-content-end pr-1 d-inline-block float-right" onClick={this.handleEdit}>{editIcon}</a>
-                    <a className="d-inline-block float-right pr-1" onClick={this.handleSave}>{saveIcon}</a>
+                    <a className="d-inline-block float-right pr-2" onClick={this.handleSave}>{saveIcon}</a>
+                    <a className="d-inline-block float-right pr-2">{this.state.showSpinner ? "Spinner" : ""}</a>
+                    <a className="d-inline-block float-right pr-2">{this.state.isNotFound ? "Can't find": ""}</a>
                     <div className="card-body">
                         {cityName}
                         <div className="row">

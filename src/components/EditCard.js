@@ -12,7 +12,7 @@ class EditCard extends Component{
             <div>
                 <input 
                     className="display-4 container-fluid editCityInput" 
-                    placeholder={`${this.props.cityName}...`}
+                    placeholder={`${this.props.cityName}`}
                     value={newCityName}
                     onChange={handleChange}
                 />
