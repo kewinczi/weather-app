@@ -12,7 +12,7 @@ class App extends Component {
         super();
         this.state = { 
             weather: [],
-            isLoading: true,
+            isLoading: false,
             isError: false,
             numberOfCities: 1
         }
@@ -28,17 +28,25 @@ class App extends Component {
         this.setState({numberOfCities: number})
     }
 
+    handleErrors(response) {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response;
+    }
+
     fetchWeatherForCity(city, func, index) {
+        this.setState({ 
+            isLoading: true
+        });
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=d99157026a1814b598c98bc8bc02fa34`)
+            .then(this.handleErrors)
             .then(response => response.json())
             .then(response => {
                 func(response, index);
-                this.setState({ 
-                    isLoading: false,
-                    isError: false
-                })
+                this.setState({ isLoading: false, isError: false })
             }).catch(()=>{
-                this.setState({isError: true});
+                this.setState({ isError: true, isLoading: false });
             })
     }
 

@@ -5,12 +5,14 @@ class Card extends Component{
     constructor(props) {
         super(props);
         this.state = { 
-            isEdited: false, 
+            isEdited: false,
+            isValid: false, 
             newCityName: "" 
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
         this.handleSave = this.handleSave.bind(this);
+        this.validateNewCityName = this.validateNewCityName.bind(this);
     }
 
     handleChange(e) {
@@ -23,9 +25,15 @@ class Card extends Component{
     }
 
     handleSave() {
-        this.handleEdit();
-        console.log(this.state.newCityName)
-        this.props.changeCity(this.state.newCityName, this.props.index)
+        if (this.validateNewCityName()) {
+            this.handleEdit();
+            this.props.changeCity(this.state.newCityName, this.props.index);
+            this.setState({ newCityName: "", isValid: false });
+        }
+    }
+
+    validateNewCityName() {
+        return this.state.newCityName !== "";;
     }
 
     render() {

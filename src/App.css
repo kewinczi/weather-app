@@ -1,5 +1,5 @@
 body {
-    background-image: url('https://raw.githubusercontent.com/kewinczi/weather-app/master/src/images/P1070811.png');
+    background-image: url('./images/P1070811.png');
     background-size: cover;
     background-attachment: fixed;
     color: white;
@@ -26,6 +26,7 @@ body {
 .editCityInput {
     border: 0;
     background-color: rgba(0,0,0,0);
+    text-align: center;
 }
 
 .editCityInput:focus {
