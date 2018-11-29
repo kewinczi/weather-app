@@ -1,8 +1,7 @@
 import React, { Component} from "react";
 import EditCard from "./EditCard";
 import { handleErrors } from "../helpers";
-import { FiCheck, FiEdit } from "react-icons/fi";
-import { IoMdClose } from "react-icons/io";
+import EditMenu from "./EditMenu";
 
 class Card extends Component{
     constructor(props) {
@@ -71,19 +70,20 @@ class Card extends Component{
 
     render() {
         const { weather } = this.props;
-        const { isEdited, isEmpty, isNotFound } = this.state;
-        const editIcon = !isEdited ? <FiEdit className="icon-color" /> : <IoMdClose className="icon-color"/>;
-        const saveIcon = isEdited && !isEmpty ? <FiCheck className={!isNotFound ? "icon-color": ""}/>: ""
-        const cityName = isEdited ? <EditCard cityName={weather.name} handleChange={this.handleChange}/> : <h1 className="card-title display-4">{weather.name}</h1>
+        const { isEdited, isEmpty, isNotFound, showSpinner } = this.state;
+        const cityName = isEdited ? <EditCard cityName={weather.name} handleChange={this.handleChange}/> 
+            : <h1 className="card-title display-4">{weather.name}</h1>
         return (
             <div className="col-lg-4 col-md-6 d-flex justify-content-center my-3">
                 <div className="card text-center h-100 d-inline-block rounded-0 border-0">
-                    <div className="d-flex justify-content-end">
-                        <a className="icon pr-2">{this.state.isNotFound ? "Can't find": ""}</a>
-                        <a className="icon pr-2">{this.state.showSpinner ? "Spinner" : ""}</a>
-                        <a className="icon pr-2" onClick={this.handleSave}>{saveIcon}</a>
-                        <a className="icon pr-1" disabled onClick={this.handleEdit}>{editIcon}</a>
-                    </div>
+                    <EditMenu 
+                        isEdited={isEdited} 
+                        isEmpty={isEmpty} 
+                        isNotFound={isNotFound} 
+                        showSpinner={showSpinner} 
+                        handleSave={this.handleSave} 
+                        handleEdit={this.handleEdit}
+                    />
                     <div className="card-body">
                         {cityName}
                         <div className="row">
