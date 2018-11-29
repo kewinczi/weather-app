@@ -11,7 +11,8 @@ class Card extends Component{
             isEdited: false,
             newCityName: "",
             showSpinner: false,
-            isNotFound: false
+            isNotFound: false,
+            isEmpty: true
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
@@ -22,9 +23,10 @@ class Card extends Component{
     }
 
     handleChange(e) {
-        this.setState({ isNotFound: false })
+        this.setState({ isNotFound: false})
         const newCityName = e.target.value;
         this.setState({newCityName})
+        this.setState({ isEmpty: newCityName === "" });
     }
 
     toggleEditMode() {
@@ -64,14 +66,14 @@ class Card extends Component{
     }
 
     isNewCityNameValid() {
-        return this.state.newCityName !== "";
+        return this.state.newCityName !== "" && !this.state.isNotFound;
     }
 
     render() {
         const { weather } = this.props;
-        const { isEdited } = this.state;
+        const { isEdited, isEmpty, isNotFound } = this.state;
         const editIcon = !isEdited ? <FiEdit className="icon-color" /> : <IoMdClose className="icon-color"/>;
-        const saveIcon = isEdited ? <FiCheck className="icon-color"/>: ""
+        const saveIcon = isEdited && !isEmpty ? <FiCheck className={!isNotFound ? "icon-color": ""}/>: ""
         const cityName = isEdited ? <EditCard cityName={weather.name} handleChange={this.handleChange}/> : <h1 className="card-title display-4">{weather.name}</h1>
         return (
             <div className="col-lg-4 col-md-6 d-flex justify-content-center my-3">
