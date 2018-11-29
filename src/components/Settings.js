@@ -14,8 +14,9 @@ class Settings extends Component{
         const itemsNumber = [1,4,9];
         const { numberOfCities } = this.props;
         return (
-            <div className="container">
-                Show:   
+            <div className="m-3">
+                <h5>Show:</h5>
+                <div className="form-group">  
                 {itemsNumber.map((item, index) => {
                     return (
                         <div key={`radio${index}`} className="form-check">
@@ -33,7 +34,8 @@ class Settings extends Component{
                         </div>
                     )
                 })}
-                <Link to="/" className="btn btn-sm btn-light">Save</Link>
+                </div> 
+                <Link to="/" className="btn btn-dark btn-transparent">Save</Link>
             </div>
         );
     }

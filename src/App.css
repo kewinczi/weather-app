@@ -1,5 +1,5 @@
 body {
-    background-image: url('./images/P1070811.png');
+    background-image: url('https://raw.githubusercontent.com/kewinczi/weather-app/master/src/images/P1070811.png');
     background-size: cover;
     background-attachment: fixed;
     color: white;
@@ -39,4 +39,10 @@ body {
 
 .icon-color:hover {
     color: gray
+}
+
+.btn-transparent {
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 0;
+    border: none;
 }
