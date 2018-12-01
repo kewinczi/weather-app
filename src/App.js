@@ -66,7 +66,7 @@ class App extends Component {
                     <div>
                         <Navbar />
                         <Route 
-                            exact path="/" 
+                            exact path="/weather-app/" 
                             render={()=> (
                                 <MainPage 
                                     numberOfCities={numberOfCities} 
@@ -78,7 +78,7 @@ class App extends Component {
                             )}
                         />
                         <Route 
-                            path="/settings"
+                            path="/weather-app/settings"
                             render={()=> (
                                 <Settings setNumberOfCities={this.setNumberOfCities}
                                     numberOfCities={numberOfCities}  

@@ -10,7 +10,7 @@ class Navbar extends Component{
         return (
             <div>
                 <nav className="navbar sticky-top py-0 d-flex justify-content-end">
-                    <Link to="/settings" className="nav-link text-light">Settings</Link>
+                    <Link to="/weather-app/settings" className="nav-link text-light">Settings</Link>
                 </nav>
             </div>
         );

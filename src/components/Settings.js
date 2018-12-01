@@ -35,7 +35,7 @@ class Settings extends Component{
                     )
                 })}
                 </div> 
-                <Link to="/" className="btn btn-dark btn-transparent">Save</Link>
+                <Link to="/weather-app/" className="btn btn-dark btn-transparent">Save</Link>
             </div>
         );
     }
