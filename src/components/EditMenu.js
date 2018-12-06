@@ -1,6 +1,7 @@
 import React, { Component} from "react";
 import { FiCheck, FiEdit } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
+import { FaSpinner } from "react-icons/fa"
 
 class EditMenu extends Component{
     constructor(props) {
@@ -13,10 +14,10 @@ class EditMenu extends Component{
         const saveIcon = isEdited && !isEmpty ? <FiCheck className={!isNotFound ? "icon-color": ""}/>: ""
         return (
             <div className="d-flex justify-content-end">
-                <a className="icon pr-2">{isNotFound ? "Can't find": ""}</a>
-                <a className="icon pr-2">{showSpinner ? "Spinner" : ""}</a>
-                <a className="icon pr-2" onClick={handleSave}>{saveIcon}</a>
-                <a className="icon pr-1" disabled onClick={handleEdit}>{editIcon}</a>
+                <p className="icon pr-2 text-danger">{isNotFound ? "Can't find": ""}</p>
+                <p className="icon pr-2">{showSpinner ? <FaSpinner /> : ""}</p>
+                <p className="icon pr-2" onClick={handleSave}>{saveIcon}</p>
+                <p className="icon pr-1" disabled onClick={handleEdit}>{editIcon}</p>
             </div>
         );
     }
