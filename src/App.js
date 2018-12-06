@@ -6,7 +6,7 @@ import MainPage from "./components/MainPage";
 import Settings from "./components/Settings";
 import { listOfCities } from './constants';
 import { handleErrors } from "./helpers";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { HashRouter as Router, Route } from "react-router-dom";
 
 class App extends Component {
     constructor() {
